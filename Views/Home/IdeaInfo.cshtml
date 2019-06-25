@@ -1,0 +1,26 @@
+
+<a href="/bright_ideas"> Bright Ideas</a>   <a href="/logout">Logout</a>
+<hr>
+<h3><a href="/users/@ViewBag.PostedIdeas.Owner.UserId">@ViewBag.PostedIdeas.Owner.FirstName</a> says:</h3>
+<p>@ViewBag.PostedIdeas.UserIdea</p>
+
+<h3>Poeple who liked this post:</h3>
+<table class = "table table-striped">
+  <thead>
+    <tr>
+        <th>Alias</th>
+        <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  @{
+    foreach (var like in ViewBag.LikedBy)
+    {
+      <tr>
+        <td><a href="/users/@like.User.UserId">@like.User.LastName</a></td>
+        <td>@like.User.FirstName</td>
+      </tr>
+    }
+  }
+  </tbody>
+</table>

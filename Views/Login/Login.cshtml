@@ -1,0 +1,22 @@
+@model LoginViewModel
+<div class= "container text-center">
+<h1>Login | <a href="/">Register</a></h1>
+<form asp-action="LoginUser" asp-controller ="Login" method="post">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <label asp-for="Email"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input type="text" asp-for="Email" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+            <label asp-for="Password"></label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input type="password" asp-for="Password" class="form-control">
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Sign In" class="btn btn-success">
+</form>
+</div>

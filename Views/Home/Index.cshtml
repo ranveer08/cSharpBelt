@@ -1,0 +1,49 @@
+﻿@model Idea
+<div>
+<h1>Hi @ViewBag.CurrentUser.LastName!<a href="logout" class="btn btn-primary pull-right">Log Out</a></h1>
+<hr>
+
+<form asp-action="AddNewIdea" method="POST">
+        <textarea type="text" asp-for="UserIdea" class="md-textarea form-control" rows="3" placeholder="post something witty here..." minlength = "5" Required></textarea>
+        <span asp-validation-for="UserIdea" class="text-danger"></span>
+        <br>
+        <input type="submit" class="btn btn-success" value="Add Idea!">
+</form>
+@{
+    foreach (var idea in ViewBag.AllIdeas)
+    {
+        <h3><a href="/users/@idea.UserId">@idea.Owner.LastName</a> says:</h3>
+        <p style="margin-left:5em;">@idea.UserIdea
+            @if(idea.UserId == ViewBag.CurrentUser.UserId)
+            {
+                <a href="/deleteidea/@idea.IdeaId">Delete</a>
+            }
+
+        </p>
+        <p>
+        @{
+            bool show = true;
+            foreach (var like in idea.LikedBy)
+            {
+                if (like.UserId == ViewBag.CurrentUser.UserId)
+                    {
+                        show = false; 
+                    }
+            }
+            if(show)
+            {
+                <a href="/like/@idea.IdeaId">Like</a>
+            }
+            else
+            {
+                <span>Liked!</span>
+            }
+        }
+          <a href="/bright_ideas/@idea.IdeaId" >@idea.LikedBy.Count People</a> like this.</p>
+
+
+
+    }
+}
+</div>
+
